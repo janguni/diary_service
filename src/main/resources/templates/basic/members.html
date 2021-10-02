@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Web Diary Service</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsd"
+                data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/diary/main">MyHome</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="/diary/main">메인</a></li>
+            <li class="active"><a href="/diary/members">회원 목록</a></li>
+            <li><a href="/diary/calendar">캘린더</a><li>
+            <li th:if="${session.mem_id != null}"><a href="/calendar.do/add">일정 추가</a></li>
+            <li th:if="${session.mem_id != null}"><a href="/diary.do/add">일기 추가</a></li>
+            <li><a href="/">인덱스</a><li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li th:if="${session.mem_id == null}"><a href="/diary/login">로그인</a></li>
+            <li th:if="${session.mem_id != null}"><a href="/diary/logout">로그아웃</a></li>
+            <li th:if="${session.mem_id == null}"><a href="/diary/join">회원가입</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">회원목록</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="py-5 text-center">
+    <hr class="my-4">
+    <div th:if="${session.mem_id != null}"> <!--로그인을 하면 회원 목록 확인가능-->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+                <th>유저타입</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.mem_name}">10000</td>
+                <td th:text="${member.mem_age}">10</td>
+                <td th:text="${member.mem_gender}">10000</td>
+                <td th:text="${member.mem_usertype}">10</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+    <div th:include="menu/footer.html" ></div>
+</body>
+</html>

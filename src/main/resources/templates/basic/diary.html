@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Web Diary Service</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style>
+    tbody td {
+      text-align: left;
+      }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsd"
+                data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/diary/main">MyHome</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="/diary/main">메인</a></li>
+            <li><a href="/diary/members">회원 목록</a></li>
+            <li><a href="/diary/calendar">캘린더</a><li>
+            <li th:if="${session.mem_id != null}"><a href="/calendar.do/add">일정 추가</a></li>
+            <li class="active" th:if="${session.mem_id != null}"><a href="/diary.do/diaries">다이어리</a></li>
+            <li><a href="/">인덱스</a><li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li th:if="${session.mem_id == null}"><a href="/diary/login">로그인</a></li>
+            <li th:if="${session.mem_id != null}"><a href="/diary/logout">로그아웃</a></li>
+            <li th:if="${session.mem_id == null}"><a href="/diary/join">회원가입</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">다이어리</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="py-5 text-center">
+        <hr class="my-4">
+        <div th:if="${session.mem_id != null}"> <!--로그인을 하면 회원 목록 확인가능-->
+            <!--여기부분을 다이어리 게시판 느낌으로 바꾸어야함-->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>날짜</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성자</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${diary.start}">100</td>
+                    <td th:text="${diary.title}">10</td>
+                    <td th:text="${diary.content}">10000</td>
+                    <td th:text="${diary.writer}">0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a href="/diary.do/diaries" class="btn btn-primary pull-left">글 목록</a>
+            <a href="/diary.do/diary.id/update" th:href="@{/diary.do/{id}/update(id=${diary.id})}" class="btn btn-primary pull-right">글 수정</a>
+            <a href="/diary.do/diary.id/delete" th:href="@{/diary.do/{id}/delete(id=${diary.id})}" class="btn btn-primary pull-right">글 삭제</a>
+        </div>
+        <hr class="my-4">
+    </div> <!-- /container -->
+</div>
+    <div th:include="menu/footer.html" ></div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Diary Service</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <style>
+        .field-error {
+            border-color: red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsd"
+            data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/diary/main">MyHome</a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/diary/main">메인</a></li>
+      <li><a href="/diary/members">회원 목록</a></li>
+      <li><a href="/diary/calendar">캘린더</a><li>
+      <li class="active"><a href="/calendar.do/add">일정 추가</a></li>
+      <li class="active"><a href="/diary.do/add">일기 추가</a></li>
+      <li><a href="/">인덱스</a><li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li th:if="${session.mem_id == null}"><a href="/diary/login">로그인</a></li>
+      <li th:if="${session.mem_id != null}"><a href="/diary/logout">로그아웃</a></li>
+      <li th:if="${session.mem_id == null}"><a href="/diary/join">회원가입</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">일정 추가</h1>
+  </div>
+</div>
+<form action="basic/join" th:action  method="post">
+  <div class="container">
+    <div>
+      <label for="id">id</label>
+      <input type="text" id="id" name="id"
+             placeholder="아이디를 입력해주세요">
+    </div>
+    <div>
+      <label for="groupId">groupId</label>
+      <input type="text" id="groupId" name="groupId"
+             placeholder="그룹아이디를 입력해주세요">
+    </div>
+    <div>
+      <label for="title">title</label>
+      <input type="text" id="title" name="title"
+             placeholder="제목을 입력해주세요">
+    </div>
+    <div>
+      <label for="writer">writer</label>
+      <input type="text" id="writer" name="writer"
+             placeholder="사용자명을 입력해주세요">
+    </div>
+    <div>
+      <label for="content">content</label>
+      <input type="text" id="content" name="content"
+             placeholder="내용을 입력해주세요">
+    </div>
+    <div>
+      <label for="start">start</label>
+      <input type="text" id="start" name="start"
+             placeholder="시작날짜를 입력해주세요">
+    </div>
+    <div>
+      <label for="end">end</label>
+      <input type="text" id="end" name="end"
+             placeholder="끝나는 날짜 입력해주세요">
+    </div>
+    <div>
+      <label for="allDay">allDay</label>
+      <input type="text" id="allDay" name="allDay"
+             placeholder="하루종일?">
+    </div>
+    <div>
+      <button class="w-100 btn btn-primary btn-lg" type="submit">일정추가</button>
+    </div>
+  </div>
+  <div th:include="menu/footer.html" ></div>
+</form>
+</body>
+</html>

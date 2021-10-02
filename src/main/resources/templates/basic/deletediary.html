@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Diary Service</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style>
+        .field-error {
+            border-color: red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsd"
+                data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/diary/main">MyHome</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="/diary/main">메인</a></li>
+            <li><a href="/diary/members">회원 목록</a></li>
+            <li><a href="/diary/calendar">캘린더</a><li>
+            <li th:if="${session.mem_id != null}"><a href="/calendar.do/add">일정 추가</a></li>
+            <li th:if="${session.mem_id != null}"><a href="/diary.do/diaries">다이어리</a></li>
+            <li><a href="/">인덱스</a><li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/diary/login">로그인</a></li>
+            <li class="active"><a href="/diary/join">회원가입</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">다이어리 작성</h1>
+    </div>
+</div>
+<!--<form action="basic/join" th:action th:object="${diary}" method="post">-->
+<form action="basic/join" th:action method="post">
+    <div class="container">
+            <h3>삭제하시겠습니까?</h3>
+            <a href="/diary.do/delete" th:href="@{/diary.do/{id}/delete/do(id=${diary.id})}"class="btn btn-primary pull-right">삭제</a>
+        </div>
+    </div>
+    <br><br>
+    <div th:include="menu/footer.html" ></div>
+</form>
+</body>
+</html>
