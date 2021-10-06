@@ -3,34 +3,37 @@ package diary.Service.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+import javax.persistence.*;
+
+@Entity
+@Getter
 public class Calendar {
+
+    @Id @GeneratedValue
+    @Column(name = "calendar_id")
     private Long id;
-    private Long groupId;
-    private String title;
-    private String writer;
-    private String content;
-    private String start;
-    private String end;
-    private boolean allDay;
-    private String textColor;
-    private String backgroundColor;
-    private String borderColor;
 
-    public Calendar(){}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id") //FK 이름 지정정    private Member member;
+    private Member member;
 
-    public Calendar(Long id, Long groupId, String title, String writer, String content, String start,
-                    String end, boolean allDay, String textColor, String backgroundColor, String borderColor) {
+    @Embedded
+    private TextInfo textInfo;
+
+    @Embedded
+    private Date date;
+
+    private boolean allDay; //0으로하여 캘린더와 구분 추후에 다시 동일하게 1로하고 컬러로 구분하는게 어떤지?-?
+
+    @Embedded
+    private Color color;
+
+    public Calendar(Long id, Member member, TextInfo textInfo, Date date, boolean allDay, Color color) {
         this.id = id;
-        this.groupId = groupId;
-        this.title = title;
-        this.writer = writer;
-        this.content = content;
-        this.start = start;
-        this.end = end;
+        this.member = member;
+        this.textInfo = textInfo;
+        this.date = date;
         this.allDay = allDay;
-        this.textColor = textColor;
-        this.backgroundColor = backgroundColor;
-        this.borderColor = borderColor;
+        this.color = color;
     }
 }
