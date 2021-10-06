@@ -1,10 +1,12 @@
 package diary.Service.repository;
 
-import web.diaryservice.domain.Calendar;
+import diary.Service.domain.Calendar;
+import org.springframework.stereotype.Repository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Repository
 public interface CalendarRepository {
     List<Calendar> calendarList(HttpServletRequest request);
 

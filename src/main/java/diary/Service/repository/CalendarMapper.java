@@ -1,8 +1,8 @@
 package diary.Service.repository;
 
+import diary.Service.domain.Calendar;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import web.diaryservice.domain.Calendar;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

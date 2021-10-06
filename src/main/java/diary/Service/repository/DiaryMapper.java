@@ -1,8 +1,9 @@
 package diary.Service.repository;
 
+import diary.Service.domain.Diary;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import web.diaryservice.domain.Diary;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

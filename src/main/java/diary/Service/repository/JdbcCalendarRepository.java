@@ -1,10 +1,10 @@
 package diary.Service.repository;
 
+import diary.Service.domain.Calendar;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import web.diaryservice.domain.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +13,11 @@ import java.util.List;
 
 @Slf4j
 @Repository
-public class JdbcCalendarRepository implements web.diaryservice.repository.CalendarRepository {
+public class JdbcCalendarRepository implements CalendarRepository{
 
     private final JdbcTemplate jdbcTemplate;
     @Autowired
-    private web.diaryservice.repository.CalendarMapper calendarMapper;
+    private CalendarMapper calendarMapper;
 
     @Autowired
     public JdbcCalendarRepository(DataSource dataSource) {

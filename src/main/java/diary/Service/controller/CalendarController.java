@@ -1,10 +1,10 @@
 package diary.Service.controller;
 
+import diary.Service.domain.Calendar;
+import diary.Service.repository.CalendarRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web.diaryservice.domain.Calendar;
-import web.diaryservice.repository.CalendarRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -32,8 +32,6 @@ public class CalendarController {
         //여기에 필요하고 여기는 바뀐게 없엇
         return calendars;
     }
-
-
 
     @GetMapping("/add")
     public String addForm() {return "basic/addcalendar";}

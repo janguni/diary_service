@@ -1,10 +1,11 @@
 package diary.Service.controller;
 
+import diary.Service.domain.Diary;
+import diary.Service.repository.DiaryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web.diaryservice.domain.Diary;
-import web.diaryservice.repository.DiaryRepository;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

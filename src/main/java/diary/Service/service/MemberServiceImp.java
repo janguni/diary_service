@@ -1,9 +1,9 @@
 package diary.Service.service;
 
+import diary.Service.domain.Member;
+import diary.Service.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import web.diaryservice.domain.Member;
-import web.diaryservice.repository.MemberRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
