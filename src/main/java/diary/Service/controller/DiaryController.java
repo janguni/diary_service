@@ -45,8 +45,7 @@ public class DiaryController {
 
     @GetMapping("/{id}") //다이어리 글 상세보기
     public String diary(@PathVariable Long id, Model model){
-        Optional<Diary> find = diaryRepository.findById(id);
-        Diary diary = find.get();
+        Diary diary = diaryRepository.findById(id);
 
         model.addAttribute("diary",diary);
         return "basic/diary";
@@ -54,8 +53,8 @@ public class DiaryController {
 
     @GetMapping("/{id}/update")
     public String update(@PathVariable Long id, Model model){
-        Optional<Diary> diary = diaryRepository.findById(id);
-        model.addAttribute("diary", diary.get());
+        Diary diary = diaryRepository.findById(id);
+        model.addAttribute("diary", diary);
         return "basic/editdiary";
     }
     @PostMapping("/{id}/update")
@@ -66,8 +65,8 @@ public class DiaryController {
 
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id, Model model){
-        Optional<Diary> diary = diaryRepository.findById(id);
-        model.addAttribute("diary", diary.get());
+        Diary diary = diaryRepository.findById(id);
+        model.addAttribute("diary", diary);
         return "basic/deletediary";
     }
     @GetMapping("/{id}/delete/do")

@@ -50,11 +50,12 @@ public class MemberController {
             log.info("binding result = {}", bindingResult);
             return "basic/join"; // 현재 폼을 다시 랜더링
         }
-        Member member = new Member(memberForm.getMem_id(),memberForm.getMem_pw(),
-                memberForm.getMem_name(), memberForm.getMem_age(), memberForm.getMem_gender(),
-                memberForm.getMem_usertype());
+        Member member = new Member(memberForm.getId(),memberForm.getPw(),
+                memberForm.getName(), memberForm.getAge(), memberForm.getGender(),
+                memberForm.getUsertype());
 
-        memberRepository.save(member);
+        memberService.join(member);
+
         return "redirect:localhost:8080/diary/basic/main";
     }
 
@@ -156,8 +157,6 @@ public class MemberController {
 //    }
 
     private boolean validateDuplicateMember(MemberForm memberForm) {
-        if(memberRepository.findById(memberForm.getMem_id())
-                .isPresent()) return true; //중복이면 true
-        else return false;
+        return memberRepository.findById(memberForm.getId()) != null; //not null이면 중복있음
     }
 }

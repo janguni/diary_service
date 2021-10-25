@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JdbcMemberRepository implements MemberRepository{
 
-    private final EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
     public void save(Member member) {
         em.persist(member);
