@@ -4,6 +4,7 @@ import diary.Service.domain.Member;
 import diary.Service.domain.MemberForm;
 import diary.Service.repository.MemberRepository;
 import diary.Service.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +20,19 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
-    MemberRepository memberRepository;
+/*    MemberRepository memberRepository;
     MemberService memberService;
 
     public MemberController(MemberRepository memberRepository, MemberService memberService) {
         this.memberRepository = memberRepository;
         this.memberService = memberService;
-    }
+    }*/
+
+    public final MemberRepository memberRepository;
+    public final MemberService memberService;
 
     @GetMapping("/diary/main")
     public String mainform(){
@@ -50,13 +55,14 @@ public class MemberController {
             log.info("binding result = {}", bindingResult);
             return "basic/join"; // 현재 폼을 다시 랜더링
         }
+        log.info("넘어가긴감");
         Member member = new Member(memberForm.getId(),memberForm.getPw(),
                 memberForm.getName(), memberForm.getAge(), memberForm.getGender(),
                 memberForm.getUsertype());
 
         memberService.join(member);
 
-        return "redirect:localhost:8080/diary/basic/main";
+        return "redirect:/diary/main";
     }
 
 //    @PostMapping("/diary/join")

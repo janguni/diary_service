@@ -1,12 +1,14 @@
 package diary.Service.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
+@Setter
 public class MemberForm {
 
     @NotEmpty(message = "아이디 필수 입력란입니다")

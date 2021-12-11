@@ -59,7 +59,7 @@ public class DiaryController {
     }
     @PostMapping("/{id}/update")
     public String update(@PathVariable Long id, @ModelAttribute Diary diary){
-        diaryRepository.update(diary);
+        diaryRepository.update(diary,diary.getTextInfo(), diary.getDate(), diary.isAllDay(),diary.getColor());
         return "redirect:/diary.do/diaries";
     }
 

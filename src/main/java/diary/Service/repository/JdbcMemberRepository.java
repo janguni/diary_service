@@ -17,8 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JdbcMemberRepository implements MemberRepository{
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     public void save(Member member) {
         em.persist(member);

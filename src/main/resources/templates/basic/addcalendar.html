@@ -50,16 +50,6 @@
 <form action="basic/join" th:action  method="post">
   <div class="container">
     <div>
-      <label for="id">id</label>
-      <input type="text" id="id" name="id"
-             placeholder="아이디를 입력해주세요">
-    </div>
-    <div>
-      <label for="groupId">groupId</label>
-      <input type="text" id="groupId" name="groupId"
-             placeholder="그룹아이디를 입력해주세요">
-    </div>
-    <div>
       <label for="title">title</label>
       <input type="text" id="title" name="title"
              placeholder="제목을 입력해주세요">
@@ -78,6 +68,7 @@
       <label for="start">start</label>
       <input type="text" id="start" name="start"
              placeholder="시작날짜를 입력해주세요">
+      <td th:text="${#dates.format(sprint.releaseDate, 'dd-MMM-yyyy')}"></td>
     </div>
     <div>
       <label for="end">end</label>

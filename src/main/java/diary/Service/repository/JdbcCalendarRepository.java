@@ -20,8 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JdbcCalendarRepository implements CalendarRepository{
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     private final MemberRepository memberRepository;
 
@@ -37,11 +36,19 @@ public class JdbcCalendarRepository implements CalendarRepository{
     }
 
     @Override
-    public void save(Calendar calendar, HttpServletRequest request) {
+    public Long save(Calendar calendar, HttpServletRequest request) {
         HttpSession session = request.getSession();
         String findId = String.valueOf(session.getAttribute("mem_id"));
         Member findMember = memberRepository.findById(findId);
-        Calendar saveCalendar = new Calendar(calendar.getId(), findMember, calendar.getTextInfo(), calendar.getDate(), calendar.isAllDay(), calendar.getColor());
-        em.persist(saveCalendar);
+        calendar.createCalendar(findMember, calendar.getTextInfo(), calendar.getDate(), calendar.isAllDay(), calendar.getColor());
+        em.persist(calendar);
+        return calendar.getId();
     }
+
+    @Override
+    public Calendar findById(Long id){
+        return em.find(Calendar.class, id);
+    }
+
+
 }
